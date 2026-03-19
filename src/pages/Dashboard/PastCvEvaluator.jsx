@@ -52,20 +52,28 @@ const PastCvEvaluator = () => {
 
         // 1. Auto-Repair Legacy Localhost Links (for old data in DB)
         let normalizedPath = path.replace(/\\/g, '/');
-        const baseUrl = import.meta.env.VITE_API_URL.replace('/api', '');
+        const apiUrl = import.meta.env.VITE_API_URL;
+        const baseUrl = apiUrl.endsWith('/api') ? apiUrl.slice(0, -4) : apiUrl;
 
-        if (normalizedPath.includes('localhost:5000')) {
-            normalizedPath = normalizedPath.replace(/http:\/\/localhost:5000/g, baseUrl);
-            normalizedPath = normalizedPath.replace(/http:\/localhost:5000/g, baseUrl); // Fix for single slash bug
+        console.log("Original Path:", path);
+
+        if (normalizedPath.toLowerCase().includes('localhost:5000')) {
+            console.log("Repairing link from localhost to:", baseUrl);
+            normalizedPath = normalizedPath.replace(/http[s]?:\/\/localhost:5000/gi, baseUrl);
+            normalizedPath = normalizedPath.replace(/http[s]?:\/localhost:5000/gi, baseUrl);
         }
 
         // 2. Resolve final URL
-        if (normalizedPath.toLowerCase().includes('http://') || normalizedPath.toLowerCase().includes('https://') || normalizedPath.toLowerCase().startsWith('http:')) {
-            window.open(normalizedPath, '_blank');
+        let finalUrl;
+        if (normalizedPath.toLowerCase().startsWith('http')) {
+            finalUrl = normalizedPath;
         } else {
             const finalPath = normalizedPath.startsWith('/') ? normalizedPath : `/${normalizedPath}`;
-            window.open(`${baseUrl}${finalPath}`, '_blank');
+            finalUrl = `${baseUrl}${finalPath}`;
         }
+
+        console.log("Opening URL:", finalUrl);
+        window.open(finalUrl, '_blank');
     };
 
     const handleViewCV = (path) => {
@@ -76,20 +84,28 @@ const PastCvEvaluator = () => {
 
         // 1. Auto-Repair Legacy Localhost Links
         let normalizedPath = path.replace(/\\/g, '/');
-        const baseUrl = import.meta.env.VITE_API_URL.replace('/api', '');
+        const apiUrl = import.meta.env.VITE_API_URL;
+        const baseUrl = apiUrl.endsWith('/api') ? apiUrl.slice(0, -4) : apiUrl;
 
-        if (normalizedPath.includes('localhost:5000')) {
-            normalizedPath = normalizedPath.replace(/http:\/\/localhost:5000/g, baseUrl);
-            normalizedPath = normalizedPath.replace(/http:\/localhost:5000/g, baseUrl);
+        console.log("Original CV Path:", path);
+
+        if (normalizedPath.toLowerCase().includes('localhost:5000')) {
+            console.log("Repairing CV link to:", baseUrl);
+            normalizedPath = normalizedPath.replace(/http[s]?:\/\/localhost:5000/gi, baseUrl);
+            normalizedPath = normalizedPath.replace(/http[s]?:\/localhost:5000/gi, baseUrl);
         }
 
         // 2. Resolve final URL
-        if (normalizedPath.toLowerCase().includes('http://') || normalizedPath.toLowerCase().includes('https://') || normalizedPath.toLowerCase().startsWith('http:')) {
-            window.open(normalizedPath, '_blank');
+        let finalUrl;
+        if (normalizedPath.toLowerCase().startsWith('http')) {
+            finalUrl = normalizedPath;
         } else {
             const finalPath = normalizedPath.startsWith('/') ? normalizedPath : `/${normalizedPath}`;
-            window.open(`${baseUrl}${finalPath}`, '_blank');
+            finalUrl = `${baseUrl}${finalPath}`;
         }
+
+        console.log("Opening CV URL:", finalUrl);
+        window.open(finalUrl, '_blank');
     };
 
     // Pagination calculations
