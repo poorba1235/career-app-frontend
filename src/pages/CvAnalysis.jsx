@@ -111,13 +111,15 @@ const CVAnalysis = () => {
         const apiUrl = import.meta.env.VITE_API_URL;
         const baseUrl = apiUrl.endsWith('/api') ? apiUrl.slice(0, -4) : apiUrl;
 
-        // Normalize path separators from Windows to Web
-        const reportPath = analysisResult.reportPath.replace(/\\/g, '/');
+        // Robust URL resolution: handle both legacy absolute URLs and newer relative paths
+        const normalizedPath = analysisResult.reportPath.replace(/\\/g, '/');
+        let fileUrl;
 
-        // Full URL logic: Handle both legacy absolute URLs and newer relative paths
-        const fileUrl = reportPath.startsWith('http')
-          ? reportPath
-          : `${baseUrl}${reportPath.startsWith('/') ? '' : '/'}${reportPath}`;
+        if (normalizedPath.toLowerCase().includes('http://') || normalizedPath.toLowerCase().includes('https://') || normalizedPath.toLowerCase().startsWith('http:')) {
+          fileUrl = normalizedPath;
+        } else {
+          fileUrl = `${baseUrl}${normalizedPath.startsWith('/') ? '' : '/'}${normalizedPath}`;
+        }
 
         window.open(fileUrl, '_blank');
         toast.success("Downloading Professional Report...");

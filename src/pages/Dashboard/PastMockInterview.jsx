@@ -114,17 +114,24 @@ const PastMockInterview = () => {
                                             </td>
                                             <td className="text-right">
                                                 {interview.reportPath ? (
-                                                    <a
-                                                        href={interview.reportPath.startsWith('http')
-                                                            ? interview.reportPath
-                                                            : `${import.meta.env.VITE_API_URL}${interview.reportPath.startsWith('/') ? '' : '/'}${interview.reportPath}`}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
+                                                    <button
+                                                        onClick={() => {
+                                                            const path = interview.reportPath;
+                                                            const baseUrl = import.meta.env.VITE_API_URL; // e.g. /api suffix
+
+                                                            let finalUrl;
+                                                            if (path.toLowerCase().includes('http://') || path.toLowerCase().includes('https://') || path.toLowerCase().startsWith('http:')) {
+                                                                finalUrl = path.replace(/\\/g, '/');
+                                                            } else {
+                                                                finalUrl = `${baseUrl}${path.startsWith('/') ? '' : '/'}${path}`;
+                                                            }
+                                                            window.open(finalUrl, '_blank');
+                                                        }}
                                                         className="table-action"
-                                                        style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', textDecoration: 'none' }}
+                                                        style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', background: 'none', border: 'none', cursor: 'pointer' }}
                                                     >
                                                         <FileText size={16} /> Report
-                                                    </a>
+                                                    </button>
                                                 ) : (
                                                     <span className="text-gray-400 text-sm">Processing...</span>
                                                 )}
