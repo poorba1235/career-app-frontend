@@ -116,14 +116,21 @@ const PastMockInterview = () => {
                                                 {interview.reportPath ? (
                                                     <button
                                                         onClick={() => {
-                                                            const path = interview.reportPath;
-                                                            const baseUrl = import.meta.env.VITE_API_URL; // e.g. /api suffix
+                                                            let path = interview.reportPath.replace(/\\/g, '/');
+                                                            const apiUrl = import.meta.env.VITE_API_URL;
+                                                            const baseUrl = apiUrl.endsWith('/api') ? apiUrl.slice(0, -4) : apiUrl;
+
+                                                            // Auto-repair legacy localhost links
+                                                            if (path.includes('localhost:5000')) {
+                                                                path = path.replace(/http:\/\/localhost:5000/g, baseUrl);
+                                                                path = path.replace(/http:\/localhost:5000/g, baseUrl);
+                                                            }
 
                                                             let finalUrl;
                                                             if (path.toLowerCase().includes('http://') || path.toLowerCase().includes('https://') || path.toLowerCase().startsWith('http:')) {
-                                                                finalUrl = path.replace(/\\/g, '/');
+                                                                finalUrl = path;
                                                             } else {
-                                                                finalUrl = `${baseUrl}${path.startsWith('/') ? '' : '/'}${path}`;
+                                                                finalUrl = `${apiUrl}${path.startsWith('/') ? '' : '/'}${path}`;
                                                             }
                                                             window.open(finalUrl, '_blank');
                                                         }}

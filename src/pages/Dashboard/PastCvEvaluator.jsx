@@ -50,15 +50,22 @@ const PastCvEvaluator = () => {
             return;
         }
 
-        // Final fallback: If it's already an absolute URL (even misformatted), just use it
-        if (path.toLowerCase().includes('http://') || path.toLowerCase().includes('https://') || path.toLowerCase().startsWith('http:')) {
-            window.open(path.replace(/\\/g, '/'), '_blank');
-            return;
+        // 1. Auto-Repair Legacy Localhost Links (for old data in DB)
+        let normalizedPath = path.replace(/\\/g, '/');
+        const baseUrl = import.meta.env.VITE_API_URL.replace('/api', '');
+
+        if (normalizedPath.includes('localhost:5000')) {
+            normalizedPath = normalizedPath.replace(/http:\/\/localhost:5000/g, baseUrl);
+            normalizedPath = normalizedPath.replace(/http:\/localhost:5000/g, baseUrl); // Fix for single slash bug
         }
 
-        const baseUrl = import.meta.env.VITE_API_URL.replace('/api', '');
-        const normalizedPath = path.replace(/\\/g, '/').startsWith('/') ? path.replace(/\\/g, '/') : `/${path.replace(/\\/g, '/')}`;
-        window.open(`${baseUrl}${normalizedPath}`, '_blank');
+        // 2. Resolve final URL
+        if (normalizedPath.toLowerCase().includes('http://') || normalizedPath.toLowerCase().includes('https://') || normalizedPath.toLowerCase().startsWith('http:')) {
+            window.open(normalizedPath, '_blank');
+        } else {
+            const finalPath = normalizedPath.startsWith('/') ? normalizedPath : `/${normalizedPath}`;
+            window.open(`${baseUrl}${finalPath}`, '_blank');
+        }
     };
 
     const handleViewCV = (path) => {
@@ -67,15 +74,22 @@ const PastCvEvaluator = () => {
             return;
         }
 
-        // Final fallback: If it's already an absolute URL (even misformatted), just use it
-        if (path.toLowerCase().includes('http://') || path.toLowerCase().includes('https://') || path.toLowerCase().startsWith('http:')) {
-            window.open(path.replace(/\\/g, '/'), '_blank');
-            return;
+        // 1. Auto-Repair Legacy Localhost Links
+        let normalizedPath = path.replace(/\\/g, '/');
+        const baseUrl = import.meta.env.VITE_API_URL.replace('/api', '');
+
+        if (normalizedPath.includes('localhost:5000')) {
+            normalizedPath = normalizedPath.replace(/http:\/\/localhost:5000/g, baseUrl);
+            normalizedPath = normalizedPath.replace(/http:\/localhost:5000/g, baseUrl);
         }
 
-        const baseUrl = import.meta.env.VITE_API_URL.replace('/api', '');
-        const normalizedPath = path.replace(/\\/g, '/').startsWith('/') ? path.replace(/\\/g, '/') : `/${path.replace(/\\/g, '/')}`;
-        window.open(`${baseUrl}${normalizedPath}`, '_blank');
+        // 2. Resolve final URL
+        if (normalizedPath.toLowerCase().includes('http://') || normalizedPath.toLowerCase().includes('https://') || normalizedPath.toLowerCase().startsWith('http:')) {
+            window.open(normalizedPath, '_blank');
+        } else {
+            const finalPath = normalizedPath.startsWith('/') ? normalizedPath : `/${normalizedPath}`;
+            window.open(`${baseUrl}${finalPath}`, '_blank');
+        }
     };
 
     // Pagination calculations

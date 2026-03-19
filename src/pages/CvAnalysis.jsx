@@ -112,9 +112,15 @@ const CVAnalysis = () => {
         const baseUrl = apiUrl.endsWith('/api') ? apiUrl.slice(0, -4) : apiUrl;
 
         // Robust URL resolution: handle both legacy absolute URLs and newer relative paths
-        const normalizedPath = analysisResult.reportPath.replace(/\\/g, '/');
-        let fileUrl;
+        let normalizedPath = analysisResult.reportPath.replace(/\\/g, '/');
+        // 1. Auto-repair legacy localhost links
+        if (normalizedPath.includes('localhost:5000')) {
+          normalizedPath = normalizedPath.replace(/http:\/\/localhost:5000/g, baseUrl);
+          normalizedPath = normalizedPath.replace(/http:\/localhost:5000/g, baseUrl);
+        }
 
+        // 2. Resolve final URL
+        let fileUrl;
         if (normalizedPath.toLowerCase().includes('http://') || normalizedPath.toLowerCase().includes('https://') || normalizedPath.toLowerCase().startsWith('http:')) {
           fileUrl = normalizedPath;
         } else {
