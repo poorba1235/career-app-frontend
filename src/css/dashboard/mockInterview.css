@@ -1,0 +1,218 @@
+/* CV Evaluator Page Styles */
+.past-cv-evaluator {
+    width: 100%;
+    padding: 1rem;
+    height: 100%;
+    background-color: #ffffff;
+    /* Explicit white background */
+}
+
+/* Shared Header Styles */
+.notifications-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    background-color: #ffffff;
+    border-radius: 16px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.header-icon {
+    color: #2D5A4C;
+    margin-right: 0.5rem;
+}
+
+.notifications-header h1 {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+/* Primary Action Button */
+.primary-action {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background-color: #2D5A4C;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(45, 90, 76, 0.2);
+}
+
+.primary-action:hover {
+    background-color: #234634;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(45, 90, 76, 0.3);
+}
+
+/* Table Styles - Consistent with Dashboard */
+.table-container {
+    background-color: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    margin-bottom: 2rem;
+}
+
+.table-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.table-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin: 0;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.data-table th,
+.data-table td {
+    padding: 1rem 1.5rem;
+    text-align: left;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.data-table th {
+    background-color: #f8fafc;
+    font-weight: 600;
+    color: #64748b;
+    font-size: 0.875rem;
+    white-space: nowrap;
+}
+
+.data-table td {
+    color: #334155;
+    font-size: 0.9375rem;
+}
+
+.data-table tr:last-child td {
+    border-bottom: none;
+}
+
+.data-table tr:hover td {
+    background-color: #f8fafc;
+}
+
+/* Text Utilities */
+.text-center {
+    text-align: center !important;
+}
+
+.text-right {
+    text-align: right !important;
+}
+
+.bold {
+    font-weight: 600;
+    color: #1e293b;
+}
+
+/* Status Badges */
+.status-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.status-badge.high {
+    background-color: #dcfce7;
+    color: #15803d;
+}
+
+.status-badge.medium {
+    background-color: #fef3c7;
+    color: #b45309;
+}
+
+.status-badge.low {
+    background-color: #fee2e2;
+    color: #b91c1c;
+}
+
+/* Action Buttons */
+.table-action {
+    padding: 0.5rem 1rem;
+    background-color: transparent;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    color: #64748b;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    margin-left: 0.5rem;
+    transition: all 0.2s;
+}
+
+.table-action:hover {
+    background-color: #f1f5f9;
+    color: #2D5A4C;
+    border-color: #cbd5e1;
+}
+
+/* Dark Mode Overrides (forcing light theme preference per recent instructions for other pages, 
+   but keeping this structure in case dark mode is re-enabled later) */
+@media (prefers-color-scheme: dark) {
+    .past-cv-evaluator {
+        background-color: #ffffff;
+        color: #334155;
+    }
+
+    .table-container {
+        background-color: #ffffff;
+        border-color: #e2e8f0;
+    }
+
+    .table-title,
+    .page-title,
+    .bold {
+        color: #1e293b;
+    }
+
+    .data-table th {
+        background-color: #f8fafc;
+        color: #64748b;
+    }
+
+    .data-table td {
+        color: #334155;
+    }
+
+    .table-action {
+        color: #64748b;
+        border-color: #e2e8f0;
+    }
+}

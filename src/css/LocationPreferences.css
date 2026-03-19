@@ -1,0 +1,673 @@
+/* CSS Variables */
+:root {
+  --primary: #2D4F43;
+  --primary-light: #3A6B5C;
+  --primary-light-bg: rgba(45, 79, 67, 0.1);
+  --background-light: #F8F9FA;
+  --background-dark: #121212;
+  --card-light: #FFFFFF;
+  --card-dark: #1E1E1E;
+  --text-primary-light: #111827;
+  --text-primary-dark: #F9FAFB;
+  --text-secondary-light: #6B7280;
+  --text-secondary-dark: #9CA3AF;
+  --border-light: #E5E7EB;
+  --border-dark: #374151;
+  --shadow-light: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-dark: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --option-bg-light: #F3F4F6;
+  --option-bg-dark: #2D2D2D;
+  --success-light: #10B981;
+  --success-dark: #059669;
+}
+
+/* Dark Mode Classes */
+.preferences-page.dark {
+  --background: var(--background-dark);
+  --card: var(--card-dark);
+  --text-primary: var(--text-primary-dark);
+  --text-secondary: var(--text-secondary-dark);
+  --border: var(--border-dark);
+  --shadow: var(--shadow-dark);
+  --option-bg: var(--option-bg-dark);
+}
+
+.preferences-page:not(.dark) {
+  --background: var(--background-light);
+  --card: var(--card-light);
+  --text-primary: var(--text-primary-light);
+  --text-secondary: var(--text-secondary-light);
+  --border: var(--border-light);
+  --shadow: var(--shadow-light);
+  --option-bg: var(--option-bg-light);
+}
+
+/* Base Styles */
+.preferences-page {
+  min-height: 100vh;
+  background-color: var(--background);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem 1rem;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+/* Progress Container */
+.progress-container {
+  width: 100%;
+  max-width: 64rem;
+  margin-bottom: 3rem;
+}
+
+.progress-steps {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.progress-line {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--border);
+  transform: translateY(-50%);
+  z-index: 0;
+}
+
+.progress-line-filled {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 2px;
+  background-color: var(--primary);
+  transform: translateY(-50%);
+  z-index: 1;
+  transition: width 0.3s ease;
+}
+
+.progress-step {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.step-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  transition: all 0.3s;
+}
+
+.progress-step.active .step-icon {
+  background-color: var(--primary);
+  color: white;
+  border-color: var(--primary);
+  box-shadow: 0 4px 6px rgba(45, 79, 67, 0.2);
+}
+
+.progress-step.completed .step-icon {
+  background-color: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.step-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.step-counter {
+  text-align: center;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+/* Main Content */
+.preferences-content {
+  width: 100%;
+  max-width: 64rem;
+}
+
+.preferences-card {
+  background-color: var(--card);
+  border-radius: 1.5rem;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  padding: 2rem;
+}
+
+@media (min-width: 768px) {
+  .preferences-card {
+    padding: 4rem;
+  }
+}
+
+/* Header Section */
+.header-section {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.page-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+@media (min-width: 768px) {
+  .page-title {
+    font-size: 2.5rem;
+  }
+}
+
+.page-subtitle {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--text-secondary);
+  max-width: 32rem;
+  margin: 0 auto;
+}
+
+/* Preferences Form */
+.preferences-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+/* Preference Section */
+.preference-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+/* Locations Grid */
+.locations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .locations-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1rem;
+  }
+}
+
+/* Location Button */
+.location-button {
+  position: relative;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border);
+  background-color: var(--option-bg);
+  color: var(--text-primary);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s;
+  overflow: hidden;
+  min-height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.location-button:hover {
+  border-color: var(--primary);
+  background-color: var(--card);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.location-button.selected {
+  background-color: var(--primary);
+  color: white;
+  border-color: var(--primary);
+  box-shadow: 0 4px 6px rgba(45, 79, 67, 0.2);
+}
+
+.check-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+}
+
+.check-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Outside UK Toggle */
+.outside-uk-toggle {
+  padding: 1.5rem;
+  border-radius: 1rem;
+  background-color: var(--option-bg);
+  border: 1px solid var(--border);
+}
+
+.toggle-label {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+}
+
+.toggle-input {
+  display: none;
+}
+
+.toggle-slider {
+  position: relative;
+  width: 3.5rem;
+  height: 1.75rem;
+  background-color: var(--border);
+  border-radius: 2rem;
+  transition: all 0.3s;
+}
+
+.toggle-slider:before {
+  content: '';
+  position: absolute;
+  width: 1.25rem;
+  height: 1.25rem;
+  left: 0.25rem;
+  top: 0.25rem;
+  background-color: white;
+  border-radius: 50%;
+  transition: all 0.3s;
+}
+
+.toggle-input:checked + .toggle-slider {
+  background-color: var(--primary);
+}
+
+.toggle-input:checked + .toggle-slider:before {
+  transform: translateX(1.75rem);
+}
+
+.toggle-text {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  flex: 1;
+}
+
+.toggle-note {
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  padding-left: 4.5rem;
+}
+
+/* Salary Inputs */
+.salary-inputs {
+  display: flex;
+  align-items: flex-end;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.salary-column {
+  flex: 1;
+  min-width: 150px;
+}
+
+.salary-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.salary-input-wrapper {
+  position: relative;
+}
+
+.currency-symbol {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  pointer-events: none;
+}
+
+.salary-input {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 2.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border);
+  background-color: var(--card);
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.salary-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(45, 79, 67, 0.1);
+}
+
+.salary-input::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+/* Salary Separator */
+.salary-separator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 3.5rem;
+  gap: 0.5rem;
+}
+
+.separator-line {
+  width: 2rem;
+  height: 1px;
+  background-color: var(--border);
+}
+
+.separator-text {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* Salary Suggestions */
+.salary-suggestions {
+  margin-top: 1rem;
+}
+
+.suggestions-title {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 0.75rem;
+}
+
+.salary-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.salary-chip {
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  border: 1px solid var(--border);
+  background-color: var(--option-bg);
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.salary-chip:hover {
+  border-color: var(--primary);
+  background-color: var(--card);
+}
+
+.salary-chip:active {
+  background-color: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+/* Navigation Section */
+.navigation-section {
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .navigation-section {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding: 0.75rem 2rem;
+  border-radius: 0.5rem;
+  background-color: var(--border);
+  color: var(--text-secondary);
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  width: 100%;
+  justify-content: center;
+}
+
+@media (min-width: 640px) {
+  .back-button {
+    width: auto;
+  }
+}
+
+.back-button:hover {
+  background-color:#2d4b37;
+  color: #2d4b37;
+}
+
+.back-button svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--text-secondary);
+}
+
+.back-button:hover svg {
+  color: #2d4b37;
+}
+
+.navigation-right {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .navigation-right {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1.5rem;
+    width: auto;
+  }
+}
+
+.skip-button {
+  color: var(--text-secondary);
+  font-weight: 500;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  transition: color 0.2s;
+  text-align: center;
+}
+
+.skip-button:hover {
+  color: var(--text-primary);
+}
+
+.continue-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 2rem;
+  border-radius: 0.5rem;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  justify-content: center;
+  box-shadow: 0 4px 6px rgba(45, 79, 67, 0.2);
+}
+
+.continue-button:hover {
+  background-color: #2d4b37;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 8px rgba(45, 79, 67, 0.3);
+}
+
+.continue-button:active {
+  transform: translateY(0);
+}
+
+.continue-button svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: white;
+  transition: transform 0.2s;
+}
+
+.continue-button:hover svg {
+  transform: scale(1.1);
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+  .preferences-page {
+    padding: 1.5rem 1rem;
+  }
+  
+  .preferences-card {
+    padding: 1.5rem;
+  }
+  
+  .page-title {
+    font-size: 1.875rem;
+  }
+  
+  .locations-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .salary-inputs {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .salary-column {
+    min-width: 100%;
+  }
+  
+  .salary-separator {
+    height: auto;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    margin: 0.5rem 0;
+  }
+  
+  .separator-line {
+    width: 100%;
+    height: 1px;
+  }
+  
+  .separator-text {
+    white-space: nowrap;
+  }
+  
+  .progress-steps {
+    gap: 0.5rem;
+  }
+  
+  .step-label {
+    font-size: 0.625rem;
+  }
+}
+
+/* Animation for preference sections */
+.preference-section {
+  animation: fadeInUp 0.3s ease-out;
+  animation-fill-mode: both;
+}
+
+.preference-section:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.preference-section:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.preference-section:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

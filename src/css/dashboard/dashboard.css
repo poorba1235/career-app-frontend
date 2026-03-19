@@ -1,0 +1,255 @@
+/* Global Variables */
+:root {
+  --primary-color: #2D5A4C;
+  --accent-color: #10B981;
+  --background: #F8FAFC;
+  --card-light: #FFFFFF;
+  --card-dark: #1E293B;
+  --new-sidebar-dark: #244439;
+  --text-light: #1E293B;
+  --text-dark: #F1F5F9;
+  --border-light: #E2E8F0;
+  --border-dark: #334155;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+}
+
+/* Dashboard Layout */
+.dashboard {
+  min-height: 100vh;
+  display: flex;
+  background-color: var(--background-light);
+  color: var(--text-light);
+  font-family: 'Inter', sans-serif;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* new-sidebar */
+.new-sidebar {
+  width: 16rem;
+  background-color: #2D5A4C;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  flex-shrink: 0;
+}
+
+.new-sidebar-header {
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.new-sidebar-logo {
+  width: 2rem;
+  height: 2rem;
+  background-color: white;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-color);
+}
+
+.new-sidebar-logo .material-icons-outlined {
+  font-size: 1.25rem;
+}
+
+.new-sidebar-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+.new-sidebar-nav {
+  flex: 1;
+  padding: 0 1rem;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  overflow-y: auto;
+}
+
+.new-sidebar-footer {
+  padding: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-xl);
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.nav-item:hover {
+  color: white;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.nav-item.active {
+  background-color: white;
+  color: var(--primary-color);
+}
+
+.nav-item .material-icons-outlined {
+  font-size: 1.25rem;
+}
+
+/* Main Content */
+.dashboard-main {
+  flex: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.dashboard-header {
+  height: 5rem;
+  background-color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  flex-shrink: 0;
+}
+
+.dashboard-header h1 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: white;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.dash-back-button {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: white;
+  padding: 0.625rem 1.25rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.dash-back-button:hover {
+  background-color: white;
+  color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border-color: white;
+}
+
+.dash-back-button:active {
+  transform: translateY(0);
+}
+
+.dash-back-button .material-icons-outlined {
+  font-size: 1rem;
+}
+
+.user-avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.user-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Full-width content area - NO PADDING */
+.dashboard-content-full {
+  flex: 1;
+  overflow-y: auto;
+  width: 100%;
+  height: calc(100vh - 5rem);
+  /* Subtract header height */
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .dashboard {
+    background-color: var(--background);
+    color: var(--text-dark);
+  }
+
+  .dashboard-header {
+    background-color: var(--primary-color);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .dashboard {
+    position: relative;
+  }
+
+  .new-sidebar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1000;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+
+  .new-sidebar.open {
+    transform: translateX(0);
+  }
+
+  .dashboard-main {
+    width: 100%;
+  }
+
+  .dashboard-header {
+    padding: 0 1rem;
+  }
+
+  .header-actions {
+    gap: 0.5rem;
+  }
+
+  .dash-back-button span:last-child {
+    display: none;
+  }
+
+  .dash-back-button {
+    padding: 0.5rem;
+  }
+}
