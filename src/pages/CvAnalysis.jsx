@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
-import '../css/CVAnalysis.css';
+import '../css/CvAnalysis.css';
 
 const LoginGate = ({ feature }) => (
   <div className="login-gate">

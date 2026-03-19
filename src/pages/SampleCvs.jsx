@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import '../css/SampleCVs.css';
+import { useState } from 'react';
+import '../css/SampleCvs.css';
 
 const SampleCVs = () => {
   const [activeFilter, setActiveFilter] = useState('all');
-  
+
   const cvTemplates = [
     {
       id: 1,
@@ -70,8 +70,8 @@ const SampleCVs = () => {
     { id: 'marketing', name: 'Marketing & Sales' }
   ];
 
-  const filteredTemplates = activeFilter === 'all' 
-    ? cvTemplates 
+  const filteredTemplates = activeFilter === 'all'
+    ? cvTemplates
     : cvTemplates.filter(template => template.industry === activeFilter);
 
   const handleFilterChange = (filterId) => {
@@ -93,7 +93,7 @@ const SampleCVs = () => {
             </button>
           ))}
         </nav>
-{/*         
+        {/*         
         <div className="sidebar-promo">
           <h3 className="promo-title">Need a custom review?</h3>
           <p className="promo-text">
@@ -112,7 +112,7 @@ const SampleCVs = () => {
             <h2 className="page-title">Resume Library</h2>
             <p className="cvpage-subtitle">Choose from our professionally designed, ATS-friendly templates.</p>
           </div>
-          
+
           {/* <div className="header-actions">
             <button className="icon-button">
               <span className="material-icons-round"></span>
@@ -143,13 +143,13 @@ const SampleCVs = () => {
         <div className="cv-grid">
           {filteredTemplates.map(template => (
             <div key={template.id} className="cv-card">
-              <div 
-                className="cv-preview" 
+              <div
+                className="cv-preview"
                 style={{ backgroundColor: template.color }}
               >
                 {template.imageUrl ? (
-                  <img 
-                    src={template.imageUrl} 
+                  <img
+                    src={template.imageUrl}
                     alt={`${template.title} Resume Preview`}
                     className="cv-image"
                   />
@@ -161,7 +161,7 @@ const SampleCVs = () => {
                   </div>
                 )}
               </div>
-              
+
               <div className="cv-info">
                 <div className="cv-header">
                   <h3 className="cv-title">{template.title}</h3>
@@ -170,7 +170,7 @@ const SampleCVs = () => {
                   </span>
                 </div>
                 <p className="cv-description">{template.description}</p>
-                
+
                 <div className="cv-actions">
                   <button className="preview-button">
                     <span className="material-icons-round"></span>
