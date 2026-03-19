@@ -115,7 +115,9 @@ const PastMockInterview = () => {
                                             <td className="text-right">
                                                 {interview.reportPath ? (
                                                     <a
-                                                        href={`${import.meta.env.VITE_API_URL}${interview.reportPath}`}
+                                                        href={interview.reportPath.startsWith('http')
+                                                            ? interview.reportPath
+                                                            : `${import.meta.env.VITE_API_URL}${interview.reportPath.startsWith('/') ? '' : '/'}${interview.reportPath}`}
                                                         target="_blank"
                                                         rel="noopener noreferrer"
                                                         className="table-action"

@@ -49,9 +49,16 @@ const PastCvEvaluator = () => {
             toast.error('Report not available');
             return;
         }
-        // Ensure path is correct relative to server root
-        const url = `${import.meta.env.VITE_API_URL.replace('/api', '')}/${path.replace(/\\/g, '/')}`;
-        window.open(url, '_blank');
+
+        // Final fallback: If it's already an absolute URL (even misformatted), just use it
+        if (path.toLowerCase().includes('http://') || path.toLowerCase().includes('https://') || path.toLowerCase().startsWith('http:')) {
+            window.open(path.replace(/\\/g, '/'), '_blank');
+            return;
+        }
+
+        const baseUrl = import.meta.env.VITE_API_URL.replace('/api', '');
+        const normalizedPath = path.replace(/\\/g, '/').startsWith('/') ? path.replace(/\\/g, '/') : `/${path.replace(/\\/g, '/')}`;
+        window.open(`${baseUrl}${normalizedPath}`, '_blank');
     };
 
     const handleViewCV = (path) => {
@@ -59,8 +66,13 @@ const PastCvEvaluator = () => {
             toast.error('Original CV not available');
             return;
         }
-        // Ensure path is correct relative to server root
-        const url = `${import.meta.env.VITE_API_URL.replace('/api', '')}/${path.replace(/\\/g, '/')}`;
+        // Robust URL resolution: handle both legacy absolute URLs and newer relative paths
+        const baseUrl = import.meta.env.VITE_API_URL.replace('/api', '');
+        const normalizedPath = path.replace(/\\/g, '/');
+        const url = normalizedPath.startsWith('http')
+            ? normalizedPath
+            : `${baseUrl}${normalizedPath.startsWith('/') ? '' : '/'}${normalizedPath}`;
+
         window.open(url, '_blank');
     };
 

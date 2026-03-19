@@ -114,8 +114,10 @@ const CVAnalysis = () => {
         // Normalize path separators from Windows to Web
         const reportPath = analysisResult.reportPath.replace(/\\/g, '/');
 
-        // Full URL: http://localhost:5000/uploads/reports/filename.pdf
-        const fileUrl = `${baseUrl}/${reportPath}`;
+        // Full URL logic: Handle both legacy absolute URLs and newer relative paths
+        const fileUrl = reportPath.startsWith('http')
+          ? reportPath
+          : `${baseUrl}${reportPath.startsWith('/') ? '' : '/'}${reportPath}`;
 
         window.open(fileUrl, '_blank');
         toast.success("Downloading Professional Report...");
