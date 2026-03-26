@@ -109,7 +109,7 @@ const CVAnalysis = () => {
       try {
         // Construct base URL from API URL (remove '/api' suffix if present)
         const apiUrl = import.meta.env.VITE_API_URL;
-        const baseUrl = apiUrl.endsWith('/api') ? apiUrl.slice(0, -4) : apiUrl;
+        const baseUrl = apiUrl.endsWith('') ? apiUrl.slice(0, -4) : apiUrl;
 
         // Robust URL resolution: handle both legacy absolute URLs and newer relative paths
         let normalizedPath = analysisResult.reportPath.replace(/\\/g, '/');
